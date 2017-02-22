@@ -40,8 +40,9 @@ public class SnakeMovement : MonoBehaviour {
         float curSpeed = speed;
         if(Input.GetAxis("Vertical") !=0)
         {
-            Bodyparts[0].Rotate(Vector3.forward * rotationspeed * Time.deltaTime * Input.GetAxis("Horizontal"));
+            Bodyparts[0].Rotate(Vector3.right * rotationspeed * Time.deltaTime * Input.GetAxis("Vertical"));
         }
+
         Bodyparts[0].Translate(Bodyparts[0].forward * curSpeed * Time.smoothDeltaTime, Space.World);
 
         if (Input.GetAxis("Horizontal") != 0)
