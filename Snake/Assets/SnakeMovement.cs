@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SnakeMovement : MonoBehaviour {
 
     public List<Transform> Bodyparts = new List<Transform>();
     public GameObject bodyprefab;
+    public ParticleSystem system;
+    public AudioSource audiosource;
+    public AudioClip explosion;
 
     public int startSize;
 
@@ -78,5 +82,16 @@ public class SnakeMovement : MonoBehaviour {
         newpart.SetParent(transform);
 
         Bodyparts.Add(newpart);
+    }
+   void OnTriggerEnter(Collider other) {
+
+            AddBodyPart();
+        audiosource.PlayOneShot(explosion, 0.8f);
+        system.Play();
+            Destroy(other.gameObject);
+        if (other.CompareTag("Fire"))
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 }
